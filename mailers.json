@@ -1,0 +1,50 @@
+[
+  {
+    "file": "00-loyalty-introduction.html",
+    "subject": "Good cuts. Great rewards.",
+    "preheader": "Your routine deserves something extra. Introducing a little thank-you for making Infinity Saloon your go-to.",
+    "completedHaircuts": 0,
+    "sendTiming": "Loyalty program introduction",
+    "figmaNode": "4:133"
+  },
+  {
+    "file": "01-after-haircut-1.html",
+    "subject": "One down. Five to go.",
+    "preheader": "It’s been 15 days since your last visit. Your first cut is in—here’s to a great grooming ritual.",
+    "completedHaircuts": 1,
+    "sendTiming": "15 days after haircut 1",
+    "figmaNode": "27:1360"
+  },
+  {
+    "file": "02-after-haircut-2.html",
+    "subject": "Two down. Keep it going.",
+    "preheader": "It’s been 15 days since your last visit. Thanks for coming back—your good-grooming ritual is taking shape.",
+    "completedHaircuts": 2,
+    "sendTiming": "15 days after haircut 2",
+    "figmaNode": "27:1487"
+  },
+  {
+    "file": "03-after-haircut-3.html",
+    "subject": "Halfway to your rewards.",
+    "preheader": "It’s been 15 days since your last visit. Three cuts in, and you’re halfway to two well-earned treats.",
+    "completedHaircuts": 3,
+    "sendTiming": "15 days after haircut 3",
+    "figmaNode": "27:1614"
+  },
+  {
+    "file": "04-after-haircut-4.html",
+    "subject": "Four down. Two to go.",
+    "preheader": "It’s been 15 days since your last visit. Your loyalty is adding up—both rewards are getting closer.",
+    "completedHaircuts": 4,
+    "sendTiming": "15 days after haircut 4",
+    "figmaNode": "27:1741"
+  },
+  {
+    "file": "05-after-haircut-5.html",
+    "subject": "One more cut. Two rewards.",
+    "preheader": "It’s been 15 days since your last visit. Five cuts in, with just one more to earn your two rewards.",
+    "completedHaircuts": 5,
+    "sendTiming": "15 days after haircut 5",
+    "figmaNode": "27:1868"
+  }
+]
