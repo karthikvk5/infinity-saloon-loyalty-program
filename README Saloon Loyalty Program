@@ -1,0 +1,219 @@
+# Infinity Saloon Loyalty Program
+
+**A customer loyalty, CRM, and lifecycle marketing platform for Infinity Saloon**
+
+> **Project status:** Planning and early development. The capabilities below describe the intended product, not features already deployed.
+
+## Project Overview
+
+Infinity Saloon Loyalty Program is an end-to-end project to help a salon build lasting customer relationships. It aims to turn in-store visits into consent-based customer profiles, reward repeat business, and enable personalized communications through a simple CRM workflow.
+
+The solution is designed for a business starting **without a website, an existing customer database, or a formal customer communication system**. It prioritizes practical staff workflows, low operational complexity, and measurable retention outcomes.
+
+## Business Problem
+
+Without a structured customer database or loyalty process, the salon cannot reliably:
+
+- Identify new versus returning customers.
+- Understand visit frequency and service preferences.
+- Recognize and reward loyal customers consistently.
+- Send targeted offers or follow-up messages with appropriate consent.
+- Measure whether campaigns generate repeat visits.
+
+## Project Objectives
+
+1. **Capture customer information** at the salon using a simple registration flow.
+2. **Maintain reliable customer records** with visit and transaction history.
+3. **Introduce loyalty incentives** with clear earning and redemption rules.
+4. **Enable lifecycle marketing** through reusable HTML email templates and campaign workflows.
+5. **Track performance** using actionable CRM, campaign, and loyalty KPIs.
+
+## Proposed Customer Journey
+
+```text
+Customer visits salon
+        ↓
+Staff invites customer to join loyalty program
+        ↓
+Customer registers and chooses communication preferences
+        ↓
+Profile created / matched to existing customer
+        ↓
+Service visit recorded and eligible rewards calculated
+        ↓
+Customer receives relevant updates (subject to consent)
+        ↓
+Customer returns, earns or redeems rewards
+        ↓
+CRM dashboard tracks retention and campaign impact
+```
+
+## Planned Features
+
+| Module | Planned capabilities |
+| --- | --- |
+| Customer enrollment | Staff-assisted form or QR-code registration; validation and duplicate checks |
+| Customer CRM | Customer profile, contact preferences, service and visit history |
+| Loyalty engine | Configurable points or visit-based rewards, balance, redemption history |
+| Segmentation | New, active, frequent, at-risk, and inactive customer groups |
+| Campaign management | Audience selection, campaign scheduling, message templates |
+| HTML email library | Responsive welcome, offer, loyalty, and reactivation mailers |
+| Automation | Welcome series, post-visit follow-up, reward reminders, win-back journeys |
+| Reporting | Registrations, repeat visits, loyalty redemption, campaign engagement |
+| Administration | Role-based access and basic audit history |
+
+**Scope note:** Email delivery, SMS, or WhatsApp messaging will require an approved external provider and relevant customer permissions. The final channel mix and vendor are to be decided.
+
+## Suggested Data Model
+
+A starting relational design could include:
+
+| Table | Example fields | Purpose |
+| --- | --- | --- |
+| `customers` | `customer_id`, `name`, `phone`, `email`, `created_at` | Core customer profile |
+| `consents` | `consent_id`, `customer_id`, `channel`, `status`, `timestamp`, `source` | Record communication permissions and withdrawals |
+| `services` | `service_id`, `service_name`, `category`, `price` | Service catalog |
+| `visits` | `visit_id`, `customer_id`, `visit_date`, `total_amount` | Salon visit history |
+| `visit_services` | `visit_id`, `service_id`, `amount` | Services delivered during each visit |
+| `loyalty_transactions` | `transaction_id`, `customer_id`, `type`, `points`, `visit_id`, `created_at` | Auditable points earning and redemption ledger |
+| `campaigns` | `campaign_id`, `name`, `channel`, `audience`, `status` | Campaign configuration |
+| `campaign_events` | `event_id`, `campaign_id`, `customer_id`, `event_type`, `timestamp` | Delivery and engagement events |
+
+These are **proposed tables**, not a deployed database schema. Fields, constraints, retention periods, and access policies will be finalized during implementation.
+
+## Lifecycle Marketing Strategy
+
+| Stage | Example trigger | Example communication | Primary KPI |
+| --- | --- | --- | --- |
+| Welcome | New customer enrolls | Membership welcome and benefits | Enrollment completion |
+| Post-visit | Completed salon visit | Thank-you and service follow-up | Repeat-visit rate |
+| Engagement | Customer reaches a loyalty milestone | Points or reward update | Reward redemption rate |
+| Retention | Customer has not visited within an expected interval | Relevant return-visit offer | Returning customers |
+| Win-back | Extended period of inactivity | Personalized reactivation campaign | Reactivation rate |
+
+Campaign triggers, timing, eligibility, and frequency caps should be tested and adjusted based on actual salon behavior. Promotional messages must honor the customer's channel preferences and applicable rules.
+
+## Email Template Library
+
+The repository will hold reusable, mobile-friendly HTML mailers for:
+
+- Welcome and loyalty enrollment
+- Post-visit thank-you messages
+- Loyalty balance and reward eligibility
+- Seasonal and promotional offers
+- Inactive customer reactivation
+
+Templates should use email-compatible HTML/CSS, meaningful alternative text, accessible contrast, clear calls to action, and tested personalization placeholders. Preview and test in common email clients before production use.
+
+## Proposed Repository Structure
+
+```text
+infinity-saloon-loyalty-program/
+├── README.md
+├── docs/
+│   ├── requirements.md
+│   ├── customer-journeys.md
+│   └── architecture.md
+├── database/
+│   └── schema.sql
+├── app/
+│   ├── frontend/
+│   └── backend/
+├── email-templates/
+│   ├── welcome/
+│   ├── retention/
+│   ├── loyalty/
+│   └── promotional/
+├── analytics/
+│   └── kpi-definitions.md
+└── tests/
+```
+
+**Note:** This is a target folder structure. Some directories or files may not exist until their implementation phase begins.
+
+## Proposed Architecture
+
+```text
+In-store staff / QR registration
+               |
+               v
+       Customer-facing form
+               |
+               v
+       Application / API layer
+               |
+      +--------+---------+
+      |                  |
+      v                  v
+Customer database   Loyalty rules
+      |                  |
+      +--------+---------+
+               |
+               v
+      Segmentation & CRM
+               |
+      +--------+---------+
+      |                  |
+      v                  v
+Email/SMS provider   KPI dashboard
+```
+
+The technology stack is **not finalized**. The implementation should favor maintainable, affordable tools suited to the salon's team size and operating needs.
+
+## Implementation Roadmap
+
+- [ ] **Phase 1 — Discovery:** Confirm customer enrollment process, staff roles, reward rules, and success metrics.
+- [ ] **Phase 2 — Data foundation:** Design schema, build registration, implement duplicate checks and consent capture.
+- [ ] **Phase 3 — CRM operations:** Record visits and services; provide customer lookup and profile management.
+- [ ] **Phase 4 — Loyalty MVP:** Configure earning and redemption rules; maintain transaction history.
+- [ ] **Phase 5 — Communications:** Create and test HTML templates; integrate a messaging provider and opt-out handling.
+- [ ] **Phase 6 — Automation:** Launch welcome, post-visit, and reactivation journeys with safeguards.
+- [ ] **Phase 7 — Analytics and launch:** Validate dashboards, test end-to-end flows, train staff, and monitor results.
+
+## Success Metrics
+
+| Metric | Definition |
+| --- | --- |
+| Enrollment rate | New loyalty enrollments ÷ eligible customers invited |
+| Repeat-visit rate | Customers with 2+ visits in a defined period ÷ customers visiting in that period |
+| Customer retention | Customers returning in a defined follow-up window ÷ eligible cohort |
+| Reward redemption rate | Redeemed rewards ÷ issued eligible rewards |
+| Campaign click-through rate | Unique clickers ÷ delivered emails, where trackable |
+| Reactivation rate | Inactive customers who return after a campaign ÷ targeted inactive customers |
+
+All metrics require explicit date windows, eligibility criteria, and event definitions before reporting.
+
+## Privacy, Security & Responsible Messaging
+
+- Collect only information necessary for customer service and the loyalty program.
+- Provide a clear privacy notice and capture channel-specific marketing permissions as appropriate.
+- Support opt-outs, consent changes, correction, and deletion requests where applicable.
+- Restrict staff access by role; secure data in transit and at rest.
+- Avoid uploading real customer data, credentials, provider API keys, or private campaign exports to GitHub.
+- Use synthetic customer records for development and demos.
+- Review applicable Indian data protection and electronic messaging requirements before launch.
+
+## Getting Started
+
+This repository currently documents the **planned product**. There is no verified runnable application or production deployment described here yet.
+
+1. Review this README and confirm the MVP scope with Infinity Saloon stakeholders.
+2. Add existing HTML mailers under the relevant `email-templates/` folders.
+3. Document the agreed loyalty rules and customer registration fields in `docs/requirements.md`.
+4. Choose a technology stack and messaging provider before writing deployment instructions.
+5. Implement and test modules incrementally using synthetic data.
+
+Once application code exists, this section should be updated with actual prerequisites, installation commands, environment-variable names, test commands, and deployment instructions.
+
+## Future Enhancements
+
+Potential later improvements include appointment reminders, referral incentives, birthday offers (with permission), service-based recommendations, A/B testing, and more advanced cohort analysis.
+
+## Project Ownership
+
+**Project:** Infinity Saloon Loyalty Program  
+**Focus areas:** CRM, loyalty management, lifecycle marketing, responsive HTML email development, and customer retention analytics.
+
+---
+
+*Built to help Infinity Saloon turn everyday visits into measurable, long-term customer relationships.*
